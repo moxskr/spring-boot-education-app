@@ -13,6 +13,21 @@
         Log out
     </button>
 </form>
+<p>
+    Add todo
+</p>
+<form th:action="@{/addTodo}" method="post">
+    <input type="text" name="text" placeholder="Add todo...">
+    <button type="submit">Add todo</button>
+</form>
+<p>
+Your todos!
+</p>
+<ul th:each="todo : ${todos}">
+    <li th:text="${todo.text} + ' ' + ${todo.getAuthorName()}">
+
+    </li>
+</ul>
 
 </body>
 </html>
