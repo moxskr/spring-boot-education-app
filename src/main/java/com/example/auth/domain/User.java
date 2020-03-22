@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_table")
@@ -18,6 +19,11 @@ public class User implements UserDetails {
     private String password;
 
     private boolean active;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role_table", joinColumns = @JoinColumn( name = "user_id "))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     public boolean isActive() {
         return active;
@@ -66,15 +72,21 @@ public class User implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public Set<Role> getAuthorities() {
+        return getRoles();
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) { this.password = password; }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
