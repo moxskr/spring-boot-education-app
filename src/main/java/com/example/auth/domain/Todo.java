@@ -15,11 +15,21 @@ public class Todo {
     @JoinColumn(name = "user_id")
     private User author;
 
+    private boolean done = false;
+
     public Todo () {}
 
     public Todo (String text, User author) {
         this.text = text;
         this.author = author;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     public String getAuthorName() {

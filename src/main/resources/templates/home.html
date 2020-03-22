@@ -24,9 +24,17 @@
 Your todos!
 </p>
 <ul th:each="todo : ${todos}">
-    <li th:text="${todo.text} + ' ' + ${todo.getAuthorName()}">
-
-    </li>
+    <li th:text="${todo.text} + ' ' + ${todo.getAuthorName()}"></li>
+    <form th:action="@{'/removeTodo/' + ${todo.getId()}}" method="get">
+        <button type="submit">
+            Remove
+        </button>
+    </form>
+    <form th:action="@{'/doneTodo/' + ${todo.getId()}}" method="get">
+        <button type="submit">
+            Done
+        </button>
+    </form>
 </ul>
 
 </body>

@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
@@ -29,4 +28,21 @@ public class HomeController {
         model.addAttribute("todos", todos);
         return "home";
     }
+
+    @GetMapping("/removeTodo/{id}")
+    public String removeTodo(@AuthenticationPrincipal User user, @PathVariable("id") Integer id, Model model) {
+        todoService.deleteTodoById(id);
+        Iterable<Todo> todos = todoService.getTodosByUser(user);
+        model.addAttribute("todos", todos);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/doneTodo/{id}")
+    public String doneTodo(@AuthenticationPrincipal User user, @PathVariable("id") Integer id, Model model) {
+        todoService.doneTodoById(id);
+        Iterable<Todo> todos = todoService.getTodosByUser(user);
+        model.addAttribute("todos", todos);
+        return "redirect:/home";
+    }
+
 }

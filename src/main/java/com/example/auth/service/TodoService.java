@@ -6,6 +6,8 @@ import com.example.auth.repos.TodoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class TodoService {
     @Autowired
@@ -18,5 +20,17 @@ public class TodoService {
 
     public Iterable<Todo> getTodosByUser(User user) {
         return todoRepo.findTodoByAuthor(user);
+    }
+
+    @Transactional
+    public void deleteTodoById(Integer id) {
+        todoRepo.deleteTodoById(id);
+    }
+
+    public void doneTodoById(Integer id) {
+        Todo todo = todoRepo.findTodoById(id);
+        todo.setDone(true);
+        todoRepo.save(todo);
+
     }
 }
