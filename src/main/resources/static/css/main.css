@@ -1,0 +1,74 @@
+body{
+    background-color: #c3ffeb;
+}
+.sign{
+    height: 100vh;
+}
+.sign form{
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #fffc;
+}
+.sign form input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    border: 3px solid #666;
+    border-radius: 5px;
+    width: 100%;
+}
+.sign button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.link-container{
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fffc;
+    margin-top: 20px;
+}
+.link-container a{
+    color: #666;
+}
+.link-container a:hover{
+    text-decoration: none;
+}
+.done{
+    text-decoration: line-through;
+}
+.header-container{
+    background-color: #fffc;
+    padding: 20px;
+    border-radius: 5px;
+}
+header{
+    margin-top: 20px;
+}
+.home--form{
+    background-color: #fffc;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 20px;
+}
+.home--form .input-group input{
+    flex: 1;
+    border: 1px solid #eee;
+    border-radius: 5px 0 0 5px;
+}
+.home--todo-list{
+    background-color: #fffc;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.home--todo-item{
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+.home--todo-item form{
+    display: inline-block;
+}
+.todo-item-done{
+    background-color: #eeeeee;
+}

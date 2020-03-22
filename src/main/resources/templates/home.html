@@ -3,39 +3,74 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
 
-<p>This is your home page!</p>
+<header>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="header-container">
+                    <div class="row">
+                        <div class="col-6 text-left">
+                            <h4 th:text="'Hello, ' + ${username}"></h4>
+                        </div>
+                        <div class="col-6 text-right">
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="btn btn-danger">
+                                    Log out
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<form th:action="@{/logout}" method="post">
-    <button type="submit">
-        Log out
-    </button>
-</form>
-<p>
-    Add todo
-</p>
-<form th:action="@{/addTodo}" method="post">
-    <input type="text" name="text" placeholder="Add todo...">
-    <button type="submit">Add todo</button>
-</form>
-<p>
-Your todos!
-</p>
-<ul th:each="todo : ${todos}">
-    <li th:text="${todo.text} + ' ' + ${todo.getAuthorName()}"></li>
-    <form th:action="@{'/removeTodo/' + ${todo.getId()}}" method="get">
-        <button type="submit">
-            Remove
-        </button>
-    </form>
-    <form th:action="@{'/doneTodo/' + ${todo.getId()}}" method="get">
-        <button type="submit">
-            Done
-        </button>
-    </form>
-</ul>
+</header>
+
+<section class="home">
+    <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="home--form">
+                        <form th:action="@{/addTodo}" method="post">
+                            <h4>Add todo</h4>
+                            <div class="input-group">
+                                <input type="text" name="text" placeholder="Add todo...">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Add todo</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="home--todo-list" th:each="todo : ${todos}">
+                        <div th:class="'home--todo-item ' + ${todo.isDone() ? 'todo-item-done' : ''}">
+                            <h5 th:text="${todo.text}"></h5>
+                            <form th:action="@{'/removeTodo/' + ${todo.getId()}}" method="get">
+                                <button type="submit" class="btn btn-primary">
+                                    Remove
+                                </button>
+                            </form>
+                            <form th:action="@{'/doneTodo/' + ${todo.getId()}}" method="get" th:if="${!todo.isDone()}">
+                                <button type="submit" class="btn btn-primary">
+                                    Done
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
 
 </body>
 </html>

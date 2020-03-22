@@ -14,27 +14,24 @@ public class HomeController {
     @Autowired
     private TodoService todoService;
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home(@AuthenticationPrincipal User user, Model model) {
         Iterable<Todo> todos = todoService.getTodosByUser(user);
         model.addAttribute("todos", todos);
+        model.addAttribute("username", user.getUsername());
         return "home";
     }
 
     @PostMapping("/addTodo")
     public String addTodo(@AuthenticationPrincipal User user, String text, Model model) {
         todoService.saveTodo(text, user);
-        Iterable<Todo> todos = todoService.getTodosByUser(user);
-        model.addAttribute("todos", todos);
-        return "home";
+        return "redirect:/";
     }
 
     @GetMapping("/removeTodo/{id}")
     public String removeTodo(@AuthenticationPrincipal User user, @PathVariable("id") Integer id, Model model) {
         todoService.deleteTodoById(id);
-        Iterable<Todo> todos = todoService.getTodosByUser(user);
-        model.addAttribute("todos", todos);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/doneTodo/{id}")
@@ -42,7 +39,7 @@ public class HomeController {
         todoService.doneTodoById(id);
         Iterable<Todo> todos = todoService.getTodosByUser(user);
         model.addAttribute("todos", todos);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
 }
