@@ -1,10 +1,9 @@
-package com.example.auth.domain;
+package com.example.auth.entities;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -16,6 +15,8 @@ public class User implements UserDetails {
 
     private String username;
 
+    private String email;
+
     private String password;
 
     private boolean active;
@@ -24,6 +25,14 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role_table", joinColumns = @JoinColumn( name = "user_id "))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public boolean isActive() {
         return active;
@@ -38,6 +47,17 @@ public class User implements UserDetails {
     }
 
     public User() {}
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public void encode() {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(this.password);
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -89,4 +109,5 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

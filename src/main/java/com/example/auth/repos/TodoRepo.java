@@ -1,7 +1,7 @@
 package com.example.auth.repos;
 
-import com.example.auth.domain.Todo;
-import com.example.auth.domain.User;
+import com.example.auth.entities.Todo;
+import com.example.auth.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TodoRepo extends CrudRepository<Todo, Long> {

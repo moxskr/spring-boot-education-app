@@ -1,7 +1,7 @@
 package com.example.auth.controller;
 
-import com.example.auth.domain.Todo;
-import com.example.auth.domain.User;
+import com.example.auth.entities.Todo;
+import com.example.auth.entities.User;
 import com.example.auth.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

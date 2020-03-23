@@ -16,7 +16,9 @@
                 <form th:action="@{/registration}" method="post">
                     <h4>Registration</h4>
                     <hr>
-                    <input type="text" name="username" placeholder="Login"/>
+                    <p class="sign--error" th:text="${error}"></p>
+                    <input type="text" name="username" placeholder="Login" />
+                    <input type="email" name="email" placeholder="Email">
                     <input type="password" name="password" placeholder="Password">
                     <button type="submit" class="btn btn-primary">Sign up</button>
                 </form>
